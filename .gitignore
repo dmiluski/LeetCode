@@ -2,3 +2,5 @@
 *.xcuserstate
 timeline.xctimeline
 UserInterfaceState.xcuserstate
+contents.xcworkspacedata
+IDEWorkspaceChecks.plist
