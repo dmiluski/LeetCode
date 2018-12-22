@@ -95,19 +95,22 @@ class Solution {
 
     func grids(for board: [[Character]]) -> [[Character]] {
         var grids: [[Character]] = []
+        grids.reserveCapacity(9)
 
 
-        for yMultiplier in 1..<4 {
-            for xMultiplier in 1..<4 {
+        for columnMultiplier in 0..<3 {
+            for rowMultiplier in 0..<3 {
                 var grid: [Character] = []
                 grid.reserveCapacity(9)
 
-                for y in 0..<3 {
-                    for x in 0..<3 {
-                        grid.append(board[yMultiplier*y][xMultiplier*x])
+                let startingRow = rowMultiplier * 3
+                let startingColumn = columnMultiplier * 3
+                for columnOffset in 0..<3 {
+                    for rowOffset in 0..<3 {
+                        grid.append(board[startingColumn + columnOffset][startingRow + rowOffset])
+
                     }
                 }
-
                 grids.append(grid)
             }
         }
