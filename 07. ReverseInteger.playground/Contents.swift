@@ -46,6 +46,12 @@ class Solution {
         if isNegative {
             sum = sum * -1
         }
+
+        // Guard against Out of Int32 Boundaries (Default to 0)
+        if sum > Int(Int32.max) || sum < Int(Int32.min) {
+            return 0
+        }
+
         return sum
     }
 }

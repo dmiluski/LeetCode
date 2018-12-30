@@ -26,7 +26,7 @@ var str = "Hello, playground"
  Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.
  */
 
-enum RomanNumeralChar: String {
+enum RomanNumeralChar: String, CaseIterable {
     case I
     case IV // Special
     case V
@@ -86,49 +86,3 @@ Solution().intToRoman(4) == "IV"
 Solution().intToRoman(9) == "IX"
 Solution().intToRoman(58) == "LVIII" // C = 100, L = 50, XXX = 30 and III = 3
 Solution().intToRoman(1994) == "MCMXCIV" // M = 1000, CM = 900, XC = 90 and IV = 4
-
-/*
- 13. Roman to Integer
-
- Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.
-*/
-class Solution2 {
-    func romanToInt(_ s: String) -> Int {
-        var input = s
-        var output = 0
-
-        // Parse String perfix to output int value
-        let options = RomanNumeralChar.allValues.reversed()
-
-        // Loop through until input is empty
-        while !input.isEmpty {
-            for (_, option) in options.enumerated() {
-                // Sample 2 Options:
-                //  Option 1: 2 Chars (for special character possibility)
-                //  Option 2: 1 Char for normal characters
-                let prefixes = [String(input.prefix(2)), String(input.prefix(1))]
-
-                guard let romanNumeral = prefixes
-                    .lazy
-                    .compactMap(RomanNumeralChar.init)
-                    .first else { continue }
-
-                input = String(input.dropFirst(romanNumeral.rawValue.count))
-                output += romanNumeral.intValue
-
-                // Break out of enumeration to re-run with a new sample off of the input
-                // No need to Step through RomanNumerals
-                break
-            }
-
-        }
-        return output
-    }
-}
-
-// Tests
-Solution2().romanToInt("III") == 3
-Solution2().romanToInt("IV") == 4
-Solution2().romanToInt("IX") == 9
-Solution2().romanToInt("LVIII") == 58 // C = 100, L = 50, XXX = 30 and III = 3
-Solution2().romanToInt("MCMXCIV") == 1994 // M = 1000, CM = 900, XC = 90 and IV = 4
