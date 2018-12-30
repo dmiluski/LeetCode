@@ -54,6 +54,7 @@ func pow(_ value : Int, _ exponent : Int) -> Int {
 
 // Approach:
 //  Extract Values, Sum, then Create new ListNodes
+//  This does not satisfy problem expectations
 class Solution1 {
     func addTwoNumbers(_ l1: ListNode, _ l2: ListNode) -> ListNode? {
 

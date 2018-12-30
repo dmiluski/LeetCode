@@ -109,12 +109,15 @@ class Solution {
     func recurseIsValid(_ string: String, mostRecentOpenBracket: Brackets?) -> (isValid: Bool, remaining: String) {
         switch (string.first, mostRecentOpenBracket) {
         case (nil, nil):
+            print("End")
             // Sentinal (End Comparison)
             return (isValid: true, remaining: string)
         case (nil, _):
+            print("Mismatch")
             // Mismatch (No remaining characters to mtach open char)
             return (isValid: false, remaining: string)
         case let (first?, nil):
+            print("Opening Bracket \(first)")
             // Check if open Bracket, otherwise, invalid
             guard let bracket = Brackets(open: first) else {
                 return (isValid: false, remaining: string)
@@ -130,19 +133,30 @@ class Solution {
             return recurseIsValid(tuple.remaining, mostRecentOpenBracket: nil)
 
         case let (first?, bracket?):
+
+            // Given Open Bracket and new character, inspect whether new character is an open/close bracket
             switch (Brackets(close: first), Brackets(open: first)) {
 
+            // If close bracket, inspect if it matches existing open bracket
             case let (closeBracket?, _) where closeBracket == bracket:
-                // Matching Close Bracket (Partial Success in SubString)
-                // Continue with remaining portion and original bracket
-
                 let suffix = String(string.suffix(from: string.index(after: string.startIndex)))
                 return (isValid: true, remaining: suffix)
+
+            // If an  open Bracket, attempt new recursive validation after this character
             case let (_, openBracket?):
+
                 // New Open Bracket (Recurse with substring)
                 let suffix = String(string.suffix(from: string.index(after: string.startIndex)))
                 let tuple = recurseIsValid(suffix, mostRecentOpenBracket: openBracket)
-                return recurseIsValid(tuple.remaining, mostRecentOpenBracket: bracket)
+
+
+                if tuple.isValid {
+                    // If valid, attempt again to validate current open bracket with substring after...
+                    return recurseIsValid(tuple.remaining, mostRecentOpenBracket: bracket)
+                } else {
+                    // If invalid, return failure
+                    return tuple
+                }
 
             default:
                 // Mismatched Brackets
@@ -164,6 +178,6 @@ Solution().isValid("(]") == false
 Solution().isValid("([)]") == false
 Solution().isValid("{[]}") == true
 Solution().isValid("[]{[(){}]{}}") == true
-
+Solution().isValid("([)") == false
 
 

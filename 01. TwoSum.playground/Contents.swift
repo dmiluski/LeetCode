@@ -41,19 +41,19 @@ struct Solution1 {
 //
 //  Leverage extra Dictionary Storage for running scratch pad
 struct Solution2 {
-    func twoSum(_ nums: [Int], target: Int) -> (Int, Int)? {
+//    func twoSum(_ nums: [Int], target: Int) -> (Int, Int)? {
+    func twoSum(_ nums: [Int], target: Int) -> [Int] {
         var dict:  [Int: Int] = [:] // [Value: Index]
 
         for (index, value) in nums.enumerated() {
             let pairValue = target - value
             if let pairIndex = dict[pairValue] {
-                return (pairIndex, index)
+                return [pairIndex, index]
             }
             dict[value] = index
         }
-        return nil
+        return []
     }
-
 }
 
 // Solution 3 (Sort)
@@ -85,10 +85,6 @@ struct Solution3 {
 
         return nil
     }
-}
-
-extension Array where Element == Int {
-
 }
 
 

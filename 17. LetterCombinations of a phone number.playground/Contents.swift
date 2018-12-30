@@ -49,7 +49,7 @@ enum PhoneNumPad: Character {
         case .six: return ["m","n","o"]
         case .seven: return ["p","q","r","s"]
         case .eight: return ["t","u","v"]
-        case .nine: return ["w","v","y","z"]
+        case .nine: return ["w","x","y","z"]
         }
     }
 }
