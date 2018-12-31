@@ -70,7 +70,7 @@ class Solution2 {
 //  Similar to the Int work with Powers
 class Solution3 {
     func isPalindrome(_ x: Int) -> Bool {
-        guard x > 0 else { return false }
+        guard x >= 0 else { return false }
         var mutableValue = x
         var values: [Int] = []
 
