@@ -57,29 +57,28 @@ class Solution {
 
     // Keep Track of Count (K from end) Use Modulo to determine the need for swap?
     // Who keeps track of the pointer changes
-    func swapPairs(node: ListNode?) -> (node: ListNode?, position: Int) {
-
+    func swapPairs(node: ListNode?, position: Int) -> ListNode? {
         // Sanitize / Sentinal Check
-        guard let node = node else { return (node: nil, position: 1) }
+        guard let node = node else { return nil }
 
-        let tuple = swapPairs(node: node.next)
+        let item = swapPairs(node: node.next, position: position + 1)
+        switch !position.isEven {
+        case true: // Odd (Pair to Swap)
 
-        switch tuple.position.isEven {
-        case true: // Even (Pair to Swap)
-            let temp = tuple.node?.next
+            let temp = item?.next
             node.next = temp
-            tuple.node?.next = node
-            return (tuple.node, tuple.position + 1)
+            item?.next = node
+            return item ?? node
 
-        case false: // Odd (Don't Swap, but update next reference to response)
-            node.next = tuple.node
-            return (node: node, position: tuple.position + 1)
+        case false: // Even  (Don't Swap, but update next reference to response)
+            node.next = item
+            return node
         }
 
     }
 
     func swapPairs(_ head: ListNode?) -> ListNode? {
-        return swapPairs(node: head).0
+        return swapPairs(node: head, position: 1)
     }
 }
 
@@ -108,3 +107,6 @@ Solution().swapPairs(ListNode.input())?.description == ListNode.output()?.descri
 
 Solution().swapPairs(ListNode.oddInput())
 Solution().swapPairs(ListNode.oddInput())?.description == ListNode.oddOutput()?.description
+
+Solution().swapPairs(ListNode(values: [1,2,3]))
+Solution().swapPairs(ListNode(values: [1,2,3,4,5]))
