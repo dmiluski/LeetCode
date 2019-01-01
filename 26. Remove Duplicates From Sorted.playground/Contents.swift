@@ -60,10 +60,20 @@ class Solution {
                 index+=1
             }
         }
-        return duplicateCount
+
+        // Return Count of Array stripped of duplicates
+        return nums.count
     }
 }
 
 var input = [0,0,1,1,1,2,2,3,3,4]
-let count = Solution().removeDuplicates(&input)
+Solution().removeDuplicates(&input) == 5
 input
+
+var input2 = [0,0,0,0,0]
+Solution().removeDuplicates(&input2)
+input2
+
+var input3 = [1,1,2]
+Solution().removeDuplicates(&input3) == 2
+input2

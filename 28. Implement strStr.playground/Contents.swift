@@ -64,10 +64,12 @@ struct Regex {
 
 class Solution {
     func strStr(_ haystack: String, _ needle: String) -> Int {
+        guard !needle.isEmpty else { return 0 }
+
         // Problem with this approach:
         // Special Characters could screw with Regex implementation
         let regex = Regex(pattern: needle)
-        return regex?.matches(in: haystack).first?.1.location ?? -1
+        return regex?.matches(in: haystack).first?.1.location ?? 0
     }
 }
 

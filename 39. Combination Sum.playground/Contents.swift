@@ -72,7 +72,7 @@ class Solution {
         model += arrays
     }
 
-    private func recurseCominationSum(candidates: [Int], target: Int) -> Model {
+    private func recurseCombinationSum(candidates: [Int], target: Int) -> Model {
 
         // Sentinal Success (Match)
         guard target != 0 else {
@@ -94,7 +94,7 @@ class Solution {
             var candidateResults = [[Int]]()
 
             // Include candidate
-            if case let .success(result) = recurseCominationSum(candidates: candidates, target: newTarget) {
+            if case let .success(result) = recurseCombinationSum(candidates: candidates, target: newTarget) {
                 insert(result: result, to: &candidateResults, for: candidate)
             }
 
@@ -104,7 +104,7 @@ class Solution {
             set.remove(candidate)
             let arrayExcludingCandidate = Array(set)
 
-            if case let .success(result) = recurseCominationSum(candidates: arrayExcludingCandidate, target: newTarget) {
+            if case let .success(result) = recurseCombinationSum(candidates: arrayExcludingCandidate, target: newTarget) {
                 insert(result: result, to: &candidateResults, for: candidate)
             }
 
@@ -122,7 +122,7 @@ class Solution {
     }
 
     func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
-        switch recurseCominationSum(candidates: candidates, target: target) {
+        switch recurseCombinationSum(candidates: candidates, target: target) {
         case let .success(result):
             return result
         case .failure:
@@ -131,7 +131,8 @@ class Solution {
     }
 }
 
-Solution().combinationSum([2,3,6,7], 7)
-print(Solution().combinationSum([2,3,6,7], 7))
+//Solution().combinationSum([2,3,6,7], 7)
+//print(Solution().combinationSum([2,3,6,7], 7))
 
-print(Solution().combinationSum([2,3,5], 8))
+//print(Solution().combinationSum([2,3,5], 8))
+print(Solution().combinationSum([6,3,5,8,7,12,11,9,4], 21))

@@ -38,19 +38,10 @@ class Solution {
 }
 
 extension String {
+
+    // Manual Check without extra memory
     var isPalindrome: Bool {
-        var lowerIndex = 0
-        var upperIndex = count - 1
-
-        while lowerIndex < upperIndex {
-
-            if [lowerIndex] != [upperIndex] {
-                return false
-            }
-            lowerIndex += 1
-            upperIndex -= 1
-        }
-        return true
+        return String(self.reversed()) == self
     }
 }
 

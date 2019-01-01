@@ -125,9 +125,6 @@ class Solution {
 
                 digits[carryPosition] += sum / 10;
                 digits[position] = sum % 10;
-                print(position)
-                print(digits)
-                print()
             }
         }
         var output = digits

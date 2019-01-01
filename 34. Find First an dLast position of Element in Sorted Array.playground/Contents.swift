@@ -44,7 +44,7 @@ extension Array where Element == Int {
         var upperIndex = count - 1
         var firstIndexOfValue: Int?
 
-        while lowIndex < upperIndex {
+        while lowIndex <= upperIndex {
             let midIndex = abs((lowIndex + upperIndex) / 2)
 
             // Value Comparisons
@@ -73,7 +73,7 @@ extension Array where Element == Int {
         var upperIndex = count - 1
         var firstIndexOfValue: Int?
 
-        while lowIndex < upperIndex {
+        while lowIndex <= upperIndex {
             let midIndex = abs((lowIndex + upperIndex) / 2)
 
             // Value Comparisons (Consider all options rather than if/else)
@@ -109,5 +109,5 @@ Solution().searchRange(inputv2, 6) == Solution().systemEquivalentSearchRange(inp
 Solution().searchRange(inputv3, 4) == Solution().systemEquivalentSearchRange(inputv3, 4)
 
 
-
+Solution().searchRange([1], 1)
 

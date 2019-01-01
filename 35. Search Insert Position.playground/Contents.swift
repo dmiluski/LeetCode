@@ -41,7 +41,7 @@ class Solution {
         var upperIndex = nums.count - 1
         var outputIndex = 0
 
-        while lowIndex < upperIndex {
+        while lowIndex <= upperIndex {
             let midIndex = abs((lowIndex + upperIndex) / 2)
 
             // Value Comparisons
@@ -76,5 +76,6 @@ Solution().search(input, 5) == 2
 Solution().search(input, 2) == 1
 Solution().search(input, 7) == 4
 Solution().search(input, 0) == 0
+Solution().search([1], 2)
 
 

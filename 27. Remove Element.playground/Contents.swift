@@ -46,9 +46,8 @@ import Foundation
 
 class Solution {
     func removeElement(_ nums: inout [Int], _ value: Int) -> Int {
-        let preCount = nums.count
         nums.removeAll(where: { $0 == value })
-        return preCount - nums.count
+        return nums.count
     }
 }
 
@@ -58,3 +57,6 @@ let output = Solution().removeElement(&input, 3)
 output == 2
 input == [2,2]
 
+var inputv2 = [0]
+let outputv2 = Solution().removeElement(&inputv2, 0)
+inputv2
