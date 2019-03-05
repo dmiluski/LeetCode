@@ -42,59 +42,67 @@ class Solution {
     }
 
     enum Direction {
-        case down, diagonal
+        /// Diagonally Down
+        case down
+
+        /// Diagonally Up
+        case diagonal
+
+        /// Right (Given 1 height Grid)
+        case right
     }
 
-    private func numberOfCollums(_ s: String, rows: Int) -> Int {
-        var collums = 0
+    private func numberOfColumns(_ s: String, rows: Int) -> Int {
+        var columns = 0
         var count = s.count
-        print(count)
+
         while count > 0 {
             // Consider Verticals
             count -= rows
-            print(count)
-            collums += 1
+            columns += 1
 
-            // Consider Diagonals
-            for _ in 0 ..< (rows / 2) {
+            // Consider Diagonals (Don't include top/bottom cells)
+            if rows > 2 {
+                for _ in 0 ..< (rows - 2) {
 
-                if count > 0 {
-                    count -= 1
-                    collums += 1
-                    print(count)
+                    if count > 0 {
+                        count -= 1
+                        columns += 1
+                    }
                 }
             }
 
+
         }
 
-        print("Collums: \(collums)")
-        return collums
+        return columns
     }
 
     func convert(_ s: String, _ numRows: Int) -> String {
         // Mutable String for extracting characters
-        var string = s
+        let string = s
 
         // Construct Collums
-        var numCollums = numberOfCollums(s, rows: numRows)
+        let numColumns = numberOfColumns(s, rows: numRows)
 
         // Construct Grid O(n)
         var grid: [[Character?]] = {
             var grid: [[Character?]] = []
-            for _ in 0 ..< numCollums {
-                let collum = [Character?](repeating: nil, count: numRows)
-                grid.append(collum)
+            for _ in 0 ..< numColumns {
+                let columns = [Character?](repeating: nil, count: numRows)
+                grid.append(columns)
             }
             return grid
         }()
 
         var gridIndex = ZigZagGridIndex(x: 0, y: 0)
-        var direction: Direction = .down
+
+        // Default Direction Diagonally Down unless height is 1
+        var direction: Direction = numRows > 1 ? .down : .right
 
         // Place Values O(n)
         for (_, char) in string.enumerated() {
             grid[gridIndex.x][gridIndex.y] = char
-            print(grid)
 
             switch direction {
             case .down:
@@ -119,13 +127,16 @@ class Solution {
                     direction = .diagonal
 
                 }
+            case .right:
+                gridIndex = ZigZagGridIndex(x: gridIndex.x + 1, y: gridIndex.y)
+                direction = .right
             }
         }
 
         // Extract Values by row to build Output String O(n)
         var output: String = ""
         for y in 0 ..< numRows {
-            for x in 0 ..< numCollums {
+            for x in 0 ..< numColumns {
                 if let char = grid[x][y] {
                     output.append(char)
                 }
@@ -157,6 +168,19 @@ Solution().convert("PAYPALISHIRING", 3) == "PAHNAPLSIIGYIR"
 Solution().convert("PAYPALISHIRING", 3)
 Solution().convert("PAYPALISHIRING", 4) == "PINALSIGYAHRPI"
 Solution().convert("PAYPALISHIRING", 4)
+Solution().convert("AB", 1) == "AB"
+
+//Solution().convert("PAYPALISHIRING", 6)
+Solution().convert("PAYPALISHIRING", 6)
+/*
+ P    R
+ A   II
+ Y  H N
+ P S  G
+ AI
+ L
+ */
+Solution().convert("A", 1) == "A"
 
 
 
