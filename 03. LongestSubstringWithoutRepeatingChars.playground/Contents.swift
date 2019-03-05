@@ -30,10 +30,16 @@ class Solution {
 
         for char in s {
 
-            // Identify Duplicate, reset
+            // Identify Duplicate
+            // Start Substring over with substring after initial duplicate
             if set.contains(char) {
-                set.removeAll()
-                currentSubString = ""
+                // Upate Substring
+                let firstIndex = currentSubString.firstIndex(of: char)!
+                let afterFirstInstance = currentSubString.index(after: firstIndex)
+                currentSubString = String(currentSubString[afterFirstInstance...])
+
+                // Update current set
+                set = Set<Character>(currentSubString)
             }
 
             set.insert(char)
@@ -51,3 +57,4 @@ class Solution {
 Solution().lengthOfLongestSubstring("abcabcbb") == 3 // "abc"
 Solution().lengthOfLongestSubstring("bbbbb") == 1 // "b"
 Solution().lengthOfLongestSubstring("pwwkew") == 3 // "wke"
+Solution().lengthOfLongestSubstring("dvdf") == 3 // "vdf"
