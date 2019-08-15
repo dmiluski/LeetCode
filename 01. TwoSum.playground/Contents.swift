@@ -37,6 +37,16 @@ struct Solution1 {
     }
 }
 
+let url = URL(string: "https://foo.com/bar/image.jpg")
+url?.lastPathComponent
+url?.path
+
+
+let imageURLs = [
+    "https://sdk.bitmoji.com/render/panel/8398397-ATl1OU1BGoloquAYuJLQgwVB5_imHg-v1.png?transparent=1&palette=1",
+    "https://sdk.bitmoji.com/render/panel/10232226-ATl1OU1BGoloquAYuJLQgwVB5_imHg-v1.png?transparent=1&palette=1",
+    "https://sdk.bitmoji.com/render/panel/10212461-ATl1OU1BGoloquAYuJLQgwVB5_imHg-v1.png?transparent=1&palette=1"
+    ].compactMap(URL.init)
 // Big(O) == O(N)
 //
 //  Leverage extra Dictionary Storage for running scratch pad
